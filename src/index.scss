@@ -1,0 +1,151 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  width: 100vw;
+  height: 100vh;
+}
+.airport-board{ 
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 56px;
+  font-weight: 300;
+  margin-left: 10vw;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+
+.flights {
+  margin: auto;
+  min-width: 80vw;
+  position: relative;
+  justify-content: center;
+  
+    &__search-form {
+      display: flex;
+      flex-direction: column;
+
+        &_date {
+          margin: auto;
+          margin-bottom: 20px;
+          border: none;
+          font-size: 22px;
+        }
+
+        &_field {
+          display: flex;
+          flex-direction: row;
+        }
+    
+        &_input {
+          position: relative;
+          height: 80px;
+          width: 100%;
+          padding-left: 70px;
+          font-size: 30px;
+          border: none;
+        }
+
+        &_submit {
+          height: 80px;
+          width: 30%;
+          background-color: #0189D1;
+          border: none;
+          color: #fff;
+          font-size: 26px;
+          text-transform: uppercase;
+          border-radius: 0px 70px 0px 0px;
+          cursor: pointer;
+          opacity: 0.7;
+
+            &:hover {
+              opacity: 1;
+            }
+        }
+    }
+    
+    &__type {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+
+      &_btn {
+        width: 45%;
+        height: 60px;
+        background-color: #0189D1;
+        border: none;
+        color: #fff;
+        font-size: 26px;
+        text-transform: uppercase;
+        cursor: pointer;
+        opacity: 0.7;
+
+          &:hover {
+            opacity: 1;
+          }
+      }
+    }
+}
+
+.departure{
+  border-radius: 10px 50px 10px 10px;
+
+    &__text {
+      margin-left: 15px;
+    }
+}
+
+.arrival {
+  border-radius: 50px 10px 10px 10px;
+
+  &__text {
+    margin-right: 15px;
+  }
+}
+
+.flightBoard {
+  margin: 40px 20px 0px 20px;
+  justify-content: space-around;
+  font-size: 20px;
+  color: #B8B9B9;
+
+}
+
+.board-table {
+  color: #000000;
+  text-align: center;
+  padding-top: 10px;
+}
+.fligths-not-found {
+  margin: auto;
+  margin-top: 40px;
+  font-size: 32px;
+  font-style: oblique;
+  color: #B8B9B9;
+}
+
+
+.fa-search {
+  position: absolute;
+  margin-top: 15px;
+  margin-left: 10px;
+  z-index: 2;
+  font-size: 50px;
+  color: #B8B9B9;
+}
+
+.logo {
+  margin-right: 10px;
+  height: 25px;
+}
+
+.displayed {
+  background-color: #fff;
+  color: #0189D1;
+}
