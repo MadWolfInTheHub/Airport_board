@@ -1,18 +1,19 @@
 import React from 'react';
-import { dataFilter } from './dataFilter';
+import { dataFilter } from '../utils/dataFilter';
 import FligthsBoard from './FligthsBoard';
 
 const FlightsList = ({ flightData, searchInfo, isDeparture }) => {
-  const filterdData = searchInfo === '' 
-    ? flightData
-    : dataFilter(flightData, searchInfo);
+  const flights = isDeparture ? flightData.departure : flightData.arrival;
+  const filterData = searchInfo === '' 
+    ? flights
+    : dataFilter(flights, searchInfo);
     return (
       <>
         {
-          filterdData.length === 0 
+          filterData.length === 0 
           ? <div className='fligths-not-found'>No flights</div>
           : <FligthsBoard 
-            filterdData={filterdData}
+            filteredData={filterData}
             isDeparture={isDeparture}
             />
         }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Provider } from 'react-redux';
-import Board from "./airport_boards/components/Board";
+import Board from "./components/Board";
 import store from "./store";
 
 class App extends Component {

@@ -1,5 +1,4 @@
-import { fetchFlights } from "./flights.gateway";
-
+import { fetchFlights } from "../service/flightsGateway";
 export const FLIGHTS_LIST_RECIEVED = 'FLIGHTS_LIST_RECIEVED';
 export const FLIGHTS_DATE_TO_CHECK = 'FLIGHTS_DATE_TO_CHECK';
 export const SEARCH_INFO = 'SEARCH_INFO';
@@ -14,9 +13,9 @@ export const flightsListRecieved = flightsList => {
   return action;
 };
 
-export const getFlightsList = (data) => {
+export const getFlightsList = (flights) => {
   const thunkAction = function(dispatch) {
-    fetchFlights(data).then(flightsList => 
+    fetchFlights(flights).then(flightsList => 
       dispatch(flightsListRecieved(flightsList))
     );
   };

@@ -2,13 +2,13 @@ import React from 'react';
 import Departure from './Departure';
 import Arrival from './Arrival';
 
-const FligthsBoard = ({filterdData, isDeparture}) => {
+const FligthsBoard = ({filteredData, isDeparture}) => {
   return (
     <table className='flightBoard'>
       {
         isDeparture
-        ? <Departure filterdData={filterdData}/>
-        : <Arrival filterdData={filterdData}/>
+        ? <Departure filteredData={filteredData}/>
+        : <Arrival filteredData={filteredData}/>
       }
     </table>
   );

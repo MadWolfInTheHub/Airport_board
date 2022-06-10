@@ -6,6 +6,7 @@ export const fetchFlights = (data) => {
       if(response.ok) {
         return response.json()
       }
+      return [];
     })
     .then(fligthsList => fligthsList);
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 
 
-const Departure = ({ filterdData }) => {
+const Departure = ({ filteredData }) => {
   return (
     <tbody>
       <tr>
@@ -14,7 +14,7 @@ const Departure = ({ filterdData }) => {
         <th className='flight'>Flight</th>
       </tr>
       {
-        filterdData.map(flight => (
+        filteredData.map(flight => (
           <tr key={flight.id}>
             <td className='terminal board-table'>{flight.term}</td>
             <td className='localTtime board-table'>{moment(flight.timeDepFact).format('hh:mm')}</td>

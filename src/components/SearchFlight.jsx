@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FlightsList from './FlightsList';
+import FligthsType from './FligthsType';
 import SearchForm from './SearchForm';
 
 class SearchFlight extends Component{
@@ -40,28 +41,22 @@ class SearchFlight extends Component{
     return (
       <>
         <SearchForm
-          handleIsDeparture={this.handleIsDeparture}
           handleChange={this.handleChange}
           onSubmit={this.onSubmit}
-          isDeparture={this.state.isDeparture}
           date={date}
           flightsDateToCheck={this.handleFlightsDateToCheck}
           value={this.state.value}
           flightToSearch={flightToSearch}
         />
-        {
-          this.state.isDeparture 
-            ?  <FlightsList 
-                flightData={flightsList.departure}
-                searchInfo={searchInfo}
-                isDeparture={this.state.isDeparture}
-              />
-            :  <FlightsList 
-                flightData={flightsList.arrival} 
-                searchInfo={searchInfo}
-                isDeparture={this.state.isDeparture}  
-              />
-        }
+        <FligthsType 
+          handleIsDeparture={this.handleIsDeparture}
+          isDeparture={this.state.isDeparture}
+        />
+        <FlightsList 
+          flightData={flightsList}
+          searchInfo={searchInfo}
+          isDeparture={this.state.isDeparture}
+        />
       </>
     );
   }

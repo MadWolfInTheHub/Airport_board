@@ -1,20 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as flightsSelectors from '../flights.selectors';
+import * as flightsSelectors from '../selectors/flights.selectors';
 import SearchFlight from './SearchFlight';
-import * as flightsActions from '../flights.actions';
+import * as flightsActions from '../actions/flights.actions';
 
 class Board extends Component {
   componentDidMount() {
     this.props.getFlightsList(this.props.date);
-  }
-
-  shouldComponentUpdate(nextProps) {
-    if (nextProps !== this.props) {
-       return true;
-    } else {
-       return false;
-    }
   }
 
   componentDidUpdate(prevProps) {
