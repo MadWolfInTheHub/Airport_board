@@ -1,65 +1,56 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+
 import FlightsList from './FlightsList';
 import FligthsType from './FligthsType';
 import SearchForm from './SearchForm';
 
-class SearchFlight extends Component{
-  state = {
-    value: '',
-    isDeparture: true,
-  };
-
-
-  handleIsDeparture = () => {
-    this.setState({
-      isDeparture: !this.state.isDeparture,
-    });
-  };
-
-  handleChange = (event) => {
-    this.setState({
-      value: event.target.value
-    });
-  };
-
-  handleFlightsDateToCheck = (event) => {
-    this.props.flightsDateToCheck(event.target.value)
-  }
-
-  onSubmit = event => {
-    event.preventDefault();
-    this.props.flightToSearch(this.state.value) 
-
+const  SearchFlight = ({ flightsList, date, searchInfo, flightsDateToCheck, flightToSearch, getFlightsList }) =>{
+  const [value, setValue] = useState('');
+  const [isDeparture, setIsDeparture] = useState(true) 
+  
+  const handleIsDeparture = () => {
+    setIsDeparture(!isDeparture)
   };
   
-  render() {
-    if (this.state.value === '') {
-      this.props.flightToSearch(this.state.value) 
-    };
-    
-    const { flightsList, date, searchInfo, flightToSearch } = this.props
-    return (
-      <>
-        <SearchForm
-          handleChange={this.handleChange}
-          onSubmit={this.onSubmit}
-          date={date}
-          flightsDateToCheck={this.handleFlightsDateToCheck}
-          value={this.state.value}
-          flightToSearch={flightToSearch}
-        />
-        <FligthsType 
-          handleIsDeparture={this.handleIsDeparture}
-          isDeparture={this.state.isDeparture}
-        />
-        <FlightsList 
-          flightData={flightsList}
-          searchInfo={searchInfo}
-          isDeparture={this.state.isDeparture}
-        />
-      </>
-    );
+  const handleChange = (event) => {
+    setValue(event.target.value)
+  };
+  
+  const handleFlightsDateToCheck = (event) => {
+    flightsDateToCheck(event.target.value)
   }
+  
+  const onSubmit = event => {
+    event.preventDefault();
+    flightToSearch(value) 
+    
+  };
+  
+  if (value === '') {
+    flightToSearch(value) 
+  };
+    
+  return (
+    <>
+      <SearchForm
+        handleChange={handleChange}
+        onSubmit={onSubmit}
+        date={date}
+        flightsDateToCheck={handleFlightsDateToCheck}
+        value={value}
+        flightToSearch={flightToSearch}
+      />
+      <FligthsType 
+        handleIsDeparture={handleIsDeparture}
+        isDeparture={isDeparture}
+      />
+      <FlightsList 
+        flightData={flightsList}
+        searchInfo={searchInfo}
+        isDeparture={isDeparture}
+      />
+    </>
+  );
 };
 
 export default SearchFlight;

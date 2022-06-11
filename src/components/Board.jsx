@@ -1,46 +1,35 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as flightsSelectors from '../selectors/flights.selectors';
 import SearchFlight from './SearchFlight';
 import * as flightsActions from '../actions/flights.actions';
 
-class Board extends Component {
-  componentDidMount() {
-    this.props.getFlightsList(this.props.date);
-  }
+const Board = ({ flightsList, date, searchInfo, getFlightsList, flightsDateToCheck, flightToSearch }) => {
+  useEffect(() => {
+    getFlightsList(date)  
+  }, [date])
+  
+  if(!flightsList) return null;
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.date !== this.props.date) {
-      this.props.getFlightsList(this.props.date);
-    }
-  }
-
-  render() {
-    const flightsList = this.props.flightsList
-    if (!flightsList) return null;
-    
-    return (
-      <section className='airport-board'>
-        <h1 className='title'>SEARCH FLIGHT</h1>
-        <SearchFlight 
-          flightsList={flightsList}
-          date={this.props.date}
-          flightsDateToCheck={this.props.flightsDateToCheck}
-          searchInfo={this.props.searchInfo}
-          flightToSearch={this.props.flightToSearch}
-          />
-      </section>
-    );
-  };
+  return (
+    <section className='airport-board'>
+      <h1 className='title'>SEARCH FLIGHT</h1>
+      <SearchFlight 
+        flightsList={flightsList}
+        date={date}
+        flightsDateToCheck={flightsDateToCheck}
+        searchInfo={searchInfo}
+        flightToSearch={flightToSearch}
+        />
+    </section>
+  );
 };
 
-const mapState = state => {
-  return {
+const mapStateToProps = state => ({
     flightsList: flightsSelectors.fligthsListSelector(state),
     date: flightsSelectors.dateSelector(state),
     searchInfo: flightsSelectors.flightToSearchSelector(state),
-  };
-};
+});
 
 const mapDispatch = {
   getFlightsList: flightsActions.getFlightsList,
@@ -48,4 +37,4 @@ const mapDispatch = {
   flightToSearch: flightsActions.flightToSearch,
 };
 
-export default connect(mapState, mapDispatch)(Board);
+export default connect(mapStateToProps, mapDispatch)(Board);
