@@ -11,7 +11,7 @@ const FlightsType = ({ isDeparture, handleIsDeparture }) => {
         <span className='departure__text'>departures</span>
       </button>
       <button 
-        className={isDeparture ? 'flights__type_btn departure' : 'flights__type_btn departure displayed'}
+        className={isDeparture ? 'flights__type_btn arrival' : 'flights__type_btn arrival displayed'}
         onClick={isDeparture ? handleIsDeparture : null}
       >
         <span className='arrival__text'>arrivals</span>

@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-
 import FlightsList from './FlightsList';
 import FligthsType from './FligthsType';
 import SearchForm from './SearchForm';
 
-const  SearchFlight = ({ flightsList, date, searchInfo, flightsDateToCheck, flightToSearch, getFlightsList }) =>{
+const  SearchFlight = ({ flightsList, date, searchInfo, flightsDateToCheck, flightToSearch, location, pathChange }) =>{
   const [value, setValue] = useState('');
   const [isDeparture, setIsDeparture] = useState(true) 
   
@@ -17,7 +16,9 @@ const  SearchFlight = ({ flightsList, date, searchInfo, flightsDateToCheck, flig
   };
   
   const handleFlightsDateToCheck = (event) => {
-    flightsDateToCheck(event.target.value)
+    flightsDateToCheck(event.target.value);
+    console.log(location)
+    pathChange(`/${event.target.value}`)
   }
   
   const onSubmit = event => {
@@ -44,11 +45,15 @@ const  SearchFlight = ({ flightsList, date, searchInfo, flightsDateToCheck, flig
         handleIsDeparture={handleIsDeparture}
         isDeparture={isDeparture}
       />
-      <FlightsList 
-        flightData={flightsList}
-        searchInfo={searchInfo}
-        isDeparture={isDeparture}
-      />
+      {
+        flightsList !== undefined ?
+        <FlightsList 
+          flightData={flightsList}
+          searchInfo={searchInfo}
+          isDeparture={isDeparture}
+        />
+        : null
+      }
     </>
   );
 };
