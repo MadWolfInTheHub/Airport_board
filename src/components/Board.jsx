@@ -8,11 +8,11 @@ const Board = ({ flightsList, date, searchInfo, getFlightsList, flightsDateToChe
   const pathChange = (value) => {
     location.pathname = value
   }
-  const dateToShow = match !== undefined ? match.params.date : date
+  /* const dateToShow = match !== undefined ? match.params.date : date */
 
 
   useEffect(() => {
-    getFlightsList(dateToShow)  
+    getFlightsList(date)  
   }, [date])
 
   
@@ -23,7 +23,7 @@ const Board = ({ flightsList, date, searchInfo, getFlightsList, flightsDateToChe
       <SearchFlight 
         pathChange={pathChange}
         flightsList={flightsList}
-        date={dateToShow}
+        date={date}
         flightsDateToCheck={flightsDateToCheck}
         searchInfo={searchInfo}
         flightToSearch={flightToSearch}

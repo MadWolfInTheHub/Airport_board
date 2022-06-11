@@ -2,7 +2,7 @@ import { FLIGHTS_LIST_RECIEVED, FLIGHTS_DATE_TO_CHECK, SEARCH_INFO } from "../ac
 
 const initialState = {
   flightsList: [],
-  date: '2021-03-12',
+  date: '',
   searchInfo: '',
 };
 

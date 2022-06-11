@@ -7,7 +7,7 @@ const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 module.exports = (env, argv) => {
   const isProduction = argv.mode === "production";
   const config = {
-    entry: "/src/index.jsx",
+    entry: "./src/index.jsx",
     output: {
       filename: "bundle.js",
       publicPath: '/',

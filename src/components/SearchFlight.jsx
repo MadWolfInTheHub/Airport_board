@@ -17,7 +17,7 @@ const  SearchFlight = ({ flightsList, date, searchInfo, flightsDateToCheck, flig
   
   const handleFlightsDateToCheck = (event) => {
     flightsDateToCheck(event.target.value);
-    pathChange(`/${event.target.value}`)
+    /* pathChange(`/${event.target.value}`) */
   }
   
   const onSubmit = event => {
