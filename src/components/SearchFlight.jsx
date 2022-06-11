@@ -17,7 +17,6 @@ const  SearchFlight = ({ flightsList, date, searchInfo, flightsDateToCheck, flig
   
   const handleFlightsDateToCheck = (event) => {
     flightsDateToCheck(event.target.value);
-    console.log(location)
     pathChange(`/${event.target.value}`)
   }
   
