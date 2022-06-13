@@ -6,7 +6,7 @@ const FlightsList = ({ flightData, searchInfo, isDeparture }) => {
   const flights = isDeparture ? flightData.departure : flightData.arrival;
   const filterData = searchInfo === '' 
     ? flights
-    : dataFilter(flights, searchInfo);
+    : dataFilter(flights, searchInfo, isDeparture);
     return (
       <>
         {
