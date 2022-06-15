@@ -1,47 +1,50 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import * as flightsSelectors from '../selectors/flights.selectors';
 import SearchFlight from './SearchFlight';
 import * as flightsActions from '../actions/flights.actions';
+import { useLocation } from 'react-router-dom';
 
-const Board = ({ flightsList, date, searchInfo, getFlightsList, flightsDateToCheck, flightToSearch, match }) => {
-  const pathChange = (value) => {
-    location.pathname = value
-  }
-  /* const dateToShow = match !== undefined ? match.params.date : date */
+const Board = ({ flightsList, getFlightsList }) => {
+  const [searchFlight, setSearchInfo] = useState('')
+  const [dateToshow, setDateToshow] = useState('')
+  const { search } = useLocation()
 
 
   useEffect(() => {
-    getFlightsList(date)  
-  }, [date])
-
+    if(search) {
+      setSearchInfo(search.split('&').at(0).split('=').at(1));
+      setDateToshow(search.split('&').at(1).split('=').at(1))
+    }
+  }, [search])
   
+
+  useEffect(() => {
+    getFlightsList(dateToshow)  
+  }, [dateToshow])
+
+
   return (
     <section className='airport-board'>
       <h4 className='notice'>Please pay Attention that flights after February 24th 2022 were canceled</h4>
       <h1 className='title'>SEARCH FLIGHT</h1>
       <SearchFlight 
-        pathChange={pathChange}
         flightsList={flightsList}
-        date={date}
-        flightsDateToCheck={flightsDateToCheck}
-        searchInfo={searchInfo}
-        flightToSearch={flightToSearch}
+        date={dateToshow}
+        flightsDateToCheck={setDateToshow}
+        searchInfo={searchFlight}
+        flightToSearch={setSearchInfo}
         />
     </section>
   );
 };
 
 const mapStateToProps = state => ({
-    flightsList: flightsSelectors.fligthsListSelector(state),
-    date: flightsSelectors.dateSelector(state),
-    searchInfo: flightsSelectors.flightToSearchSelector(state),
+  flightsList: flightsSelectors.fligthsListSelector(state),
 });
 
 const mapDispatch = {
   getFlightsList: flightsActions.getFlightsList,
-  flightsDateToCheck: flightsActions.flightsDateToCheck,
-  flightToSearch: flightsActions.flightToSearch,
 };
 
 export default connect(mapStateToProps, mapDispatch)(Board);
