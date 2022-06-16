@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import FlightsList from './FlightsList';
 import FligthsType from './FligthsType';
-import History from './History';
 import SearchForm from './SearchForm';
 
-const  SearchFlight = ({ flightsList, date, flightsDateToCheck, searchInfo, flightToSearch, }) =>{
-  const [value, setValue] = useState(searchInfo);
+const  SearchFlight = ({ flightsList, date, searchInfo, flightsDateToCheck, flightToSearch }) =>{
+  const [value, setValue] = useState('');
   const [isDeparture, setIsDeparture] = useState(true) 
   
   const handleIsDeparture = () => {
@@ -18,18 +17,16 @@ const  SearchFlight = ({ flightsList, date, flightsDateToCheck, searchInfo, flig
   
   const handleFlightsDateToCheck = (event) => {
     flightsDateToCheck(event.target.value);
-    History.push(`/flight?search=${value}&date=${event.target.value}`)
   }
   
   const onSubmit = event => {
     event.preventDefault();
     flightToSearch(value) 
-    History.push(`/flight?search=${value}&date=${date}`)
     
   };
   
   if (value === '') {
-    flightToSearch(value)
+    flightToSearch(value) 
   };
     
   return (

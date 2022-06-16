@@ -1,18 +1,18 @@
 import React from "react";
 import { Provider } from 'react-redux';
-import { Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Board from "./components/Board";
-import History from "./components/History";
 import store from "./store";
 
 const App = () => {
   return (
     <Provider store={store}>
-      <Router history={History}>
+      <BrowserRouter>
         <Switch>
-          <Route path="/" component={Board}/>
+          <Route exact path="/" component={Board}/>
+          <Route path="/:date" component={Board}/>
         </Switch>
-      </Router>
+      </BrowserRouter>
     </Provider>
   );
 };
