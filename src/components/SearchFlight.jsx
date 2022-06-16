@@ -6,7 +6,7 @@ import { useParams, useLocation } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 
 
-const  SearchFlight = ({ flightsList, flightToSearch, getFlightsList }) =>{
+const  SearchFlight = ({ flightsList, getFlightsList }) =>{
   const url = useLocation().search;
   const {data} = useParams();
   const history = useHistory()
@@ -17,8 +17,6 @@ const  SearchFlight = ({ flightsList, flightToSearch, getFlightsList }) =>{
     searchInfo = url.split('&').at(0).split('=').at(1);
     date1 = url.split('&').at(1).split('=').at(1);
   }
-  
-  console.log(date1)
   
   const [value, setValue] = useState(searchInfo === undefined ? '' : searchInfo);
   const [date, setDate] = useState(date1 === undefined ? '' : date1)
@@ -40,19 +38,19 @@ const  SearchFlight = ({ flightsList, flightToSearch, getFlightsList }) =>{
   
   const handleFlightsDateToCheck = (event) => {
     setDate(event.target.value);
-    history.push(`${isDeparture ? 'depuarture' : 'arrivals'}?search=${value}&date=${event.target.value}`)
+    history.push(`${isDeparture ? 'departures' : 'arrivals'}?search=${value}&date=${event.target.value}`)
   }
   
   const onSubmit = event => {
     event.preventDefault();
     setValue(value) 
-    history.push(`${isDeparture ? 'departure' : 'arrivals'}?search=${value}&date=${date}`)
+    history.push(`${isDeparture ? 'departures' : 'arrivals'}?search=${value}&date=${date}`)
     
   };
   useEffect(() => {
     if (value === '') {
       setValue(value)
-      history.push(`${isDeparture ? 'departure' : 'arrivals'}?search=${value}&date=${date}`)
+      history.push(`${isDeparture ? 'departures' : 'arrivals'}?search=${value}&date=${date}`)
 
     };
   }, [])
@@ -67,7 +65,6 @@ const  SearchFlight = ({ flightsList, flightToSearch, getFlightsList }) =>{
         date={date}
         flightsDateToCheck={handleFlightsDateToCheck}
         value={value}
-        flightToSearch={flightToSearch}
       />
       <FligthsType 
         handleIsDeparture={handleIsDeparture}

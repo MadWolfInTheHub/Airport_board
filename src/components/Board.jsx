@@ -1,22 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import * as flightsSelectors from '../selectors/flights.selectors';
 import SearchFlight from './SearchFlight';
 import * as flightsActions from '../actions/flights.actions';
-import { useParams, useLocation } from 'react-router-dom';
 
-const Board = ({ flightsList, date, searchInfo, getFlightsList, flightsDateToCheck, flightToSearch }) => {
-
+const Board = ({ flightsList, getFlightsList }) => {
   return (
     <section className='airport-board'>
       <h4 className='notice'>Please pay Attention that flights after February 24th 2022 were canceled</h4>
       <h1 className='title'>SEARCH FLIGHT</h1>
       <SearchFlight 
         flightsList={flightsList}
-        date={date}
-        flightsDateToCheck={flightsDateToCheck}
-        searchInfo={searchInfo}
-        flightToSearch={flightToSearch}
         getFlightsList={getFlightsList}
         />
     </section>
@@ -24,15 +18,11 @@ const Board = ({ flightsList, date, searchInfo, getFlightsList, flightsDateToChe
 };
 
 const mapStateToProps = state => ({
-    flightsList: flightsSelectors.fligthsListSelector(state),
-    date: flightsSelectors.dateSelector(state),
-    searchInfo: flightsSelectors.flightToSearchSelector(state),
+  flightsList: flightsSelectors.fligthsListSelector(state),
 });
 
 const mapDispatch = {
   getFlightsList: flightsActions.getFlightsList,
-  flightsDateToCheck: flightsActions.flightsDateToCheck,
-  flightToSearch: flightsActions.flightToSearch,
 };
 
 export default connect(mapStateToProps, mapDispatch)(Board);
