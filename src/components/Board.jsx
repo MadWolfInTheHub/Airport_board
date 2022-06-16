@@ -3,15 +3,10 @@ import { connect } from 'react-redux';
 import * as flightsSelectors from '../selectors/flights.selectors';
 import SearchFlight from './SearchFlight';
 import * as flightsActions from '../actions/flights.actions';
+import { useParams, useLocation } from 'react-router-dom';
 
-const Board = ({ flightsList, date, searchInfo, getFlightsList, flightsDateToCheck, flightToSearch, match }) => {
-  useEffect(() => {
-    getFlightsList(date)  
-  }, [date])
+const Board = ({ flightsList, date, searchInfo, getFlightsList, flightsDateToCheck, flightToSearch }) => {
 
-
-
-  
   return (
     <section className='airport-board'>
       <h4 className='notice'>Please pay Attention that flights after February 24th 2022 were canceled</h4>
@@ -22,6 +17,7 @@ const Board = ({ flightsList, date, searchInfo, getFlightsList, flightsDateToChe
         flightsDateToCheck={flightsDateToCheck}
         searchInfo={searchInfo}
         flightToSearch={flightToSearch}
+        getFlightsList={getFlightsList}
         />
     </section>
   );

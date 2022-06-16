@@ -4,6 +4,7 @@ import FligthsBoard from './FligthsBoard';
 
 const FlightsList = ({ flightData, searchInfo, isDeparture }) => {
   const flights = isDeparture ? flightData.departure : flightData.arrival;
+  console.log(searchInfo)
   const filterData = searchInfo === '' 
     ? flights
     : dataFilter(flights, searchInfo, isDeparture);

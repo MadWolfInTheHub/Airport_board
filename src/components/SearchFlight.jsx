@@ -1,12 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FlightsList from './FlightsList';
 import FligthsType from './FligthsType';
 import SearchForm from './SearchForm';
+import { useParams, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
-const  SearchFlight = ({ flightsList, date, searchInfo, flightsDateToCheck, flightToSearch }) =>{
-  const [value, setValue] = useState('');
-  const [isDeparture, setIsDeparture] = useState(true) 
+
+const  SearchFlight = ({ flightsList, flightToSearch, getFlightsList }) =>{
+  const url = useLocation().search;
+  const {data} = useParams();
+  const history = useHistory()
+  let searchInfo;
+  let date1;
+
+  if(url) {
+    searchInfo = url.split('&').at(0).split('=').at(1);
+    date1 = url.split('&').at(1).split('=').at(1);
+  }
   
+  console.log(date1)
+  
+  const [value, setValue] = useState(searchInfo === undefined ? '' : searchInfo);
+  const [date, setDate] = useState(date1 === undefined ? '' : date1)
+  const [isDeparture, setIsDeparture] = useState(data === 'departures' || data === undefined ? true : false) 
+  
+
+  useEffect(() => {
+    getFlightsList(date)  
+  }, [date])
+
+
   const handleIsDeparture = () => {
     setIsDeparture(!isDeparture)
   };
@@ -16,18 +39,25 @@ const  SearchFlight = ({ flightsList, date, searchInfo, flightsDateToCheck, flig
   };
   
   const handleFlightsDateToCheck = (event) => {
-    flightsDateToCheck(event.target.value);
+    setDate(event.target.value);
+    history.push(`${isDeparture ? 'depuarture' : 'arrivals'}?search=${value}&date=${event.target.value}`)
   }
   
   const onSubmit = event => {
     event.preventDefault();
-    flightToSearch(value) 
+    setValue(value) 
+    history.push(`${isDeparture ? 'departure' : 'arrivals'}?search=${value}&date=${date}`)
     
   };
+  useEffect(() => {
+    if (value === '') {
+      setValue(value)
+      history.push(`${isDeparture ? 'departure' : 'arrivals'}?search=${value}&date=${date}`)
+
+    };
+  }, [])
   
-  if (value === '') {
-    flightToSearch(value) 
-  };
+ 
     
   return (
     <>
@@ -42,12 +72,14 @@ const  SearchFlight = ({ flightsList, date, searchInfo, flightsDateToCheck, flig
       <FligthsType 
         handleIsDeparture={handleIsDeparture}
         isDeparture={isDeparture}
+        value={value}
+        date={date}
       />
       {
         flightsList !== undefined ?
         <FlightsList 
           flightData={flightsList}
-          searchInfo={searchInfo}
+          searchInfo={value}
           isDeparture={isDeparture}
         />
         : null
