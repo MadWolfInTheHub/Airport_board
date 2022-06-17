@@ -7,26 +7,29 @@ import { useHistory } from 'react-router-dom';
 
 
 const  SearchFlight = ({ flightsList, getFlightsList }) =>{
-  const url = useLocation().search;
+  const { search } = useLocation();
   const {data} = useParams();
   const history = useHistory()
-  let searchInfo;
-  let date1;
+  const q = useParams()
+  console.log(data)
 
-  if(url) {
-    searchInfo = url.split('&').at(0).split('=').at(1);
-    date1 = url.split('&').at(1).split('=').at(1);
+  let searchInfo;
+  let searchDate;
+
+  if(search) {
+    searchInfo = search.split('&').at(0).split('=').at(1);
+    searchDate = search.split('&').at(1).split('=').at(1);
   }
   
   const [value, setValue] = useState(searchInfo === undefined ? '' : searchInfo);
-  const [date, setDate] = useState(date1 === undefined ? '' : date1)
-  const [isDeparture, setIsDeparture] = useState(data === 'departures' || data === undefined ? true : false) 
+  const [date, setDate] = useState(searchDate === undefined ? '' : searchDate);
+  const [isDeparture, setIsDeparture] = useState(data === 'departures' || data === undefined ? true : false);
+  const newPath = (value, date) => history.push(`${isDeparture ? 'departures' : 'arrivals'}?search=${value}&date=${date}`);
   
-
+  
   useEffect(() => {
     getFlightsList(date)  
   }, [date])
-
 
   const handleIsDeparture = () => {
     setIsDeparture(!isDeparture)
@@ -38,25 +41,22 @@ const  SearchFlight = ({ flightsList, getFlightsList }) =>{
   
   const handleFlightsDateToCheck = (event) => {
     setDate(event.target.value);
-    history.push(`${isDeparture ? 'departures' : 'arrivals'}?search=${value}&date=${event.target.value}`)
+    newPath(value, event.target.value)
   }
   
   const onSubmit = event => {
     event.preventDefault();
-    setValue(value) 
-    history.push(`${isDeparture ? 'departures' : 'arrivals'}?search=${value}&date=${date}`)
-    
+    setValue(value);
+    newPath(value, date);
   };
+
   useEffect(() => {
     if (value === '') {
       setValue(value)
-      history.push(`${isDeparture ? 'departures' : 'arrivals'}?search=${value}&date=${date}`)
-
+      newPath(value, date);
     };
   }, [])
   
- 
-    
   return (
     <>
       <SearchForm
