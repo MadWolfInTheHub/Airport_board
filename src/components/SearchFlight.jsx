@@ -12,6 +12,7 @@ const  SearchFlight = ({ flightsList, getFlightsList }) =>{
   const history = useHistory()
   const q = useParams()
   console.log(data)
+  console.log(window.location)
 
   let searchInfo;
   let searchDate;
@@ -23,7 +24,7 @@ const  SearchFlight = ({ flightsList, getFlightsList }) =>{
   
   const [value, setValue] = useState(searchInfo === undefined ? '' : searchInfo);
   const [date, setDate] = useState(searchDate === undefined ? '' : searchDate);
-  const [isDeparture, setIsDeparture] = useState(data === 'departures' || data === undefined ? true : false);
+  const [isDeparture, setIsDeparture] = useState(true);
   const newPath = (value, date) => history.push(`${isDeparture ? 'departures' : 'arrivals'}?search=${value}&date=${date}`);
   
   
