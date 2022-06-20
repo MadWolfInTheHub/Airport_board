@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server -d --devtool eval-source-maps --open",
-    "build": "webpack -p"
+    "build": "webpack -p "
   },
   "keywords": [],
   "author": "",
@@ -39,7 +39,7 @@
     "prop-types": "^15.8.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-router-dom": "^5.3.0",
+    "react-router-dom": "^6.3.0",
     "reselect": "^4.1.5"
   }
 }
