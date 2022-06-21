@@ -11,19 +11,9 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Board />}>
-            <Route path="" element={<SearchFlight/>}/>
             <Route path="departures" element={<SearchFlight/>} />
             <Route path="arrivals" element={<SearchFlight/>} />
-          </Route>
-          <Route path="/arrivals" element={<Board />}>
             <Route path="" element={<SearchFlight/>}/>
-            <Route path="departures" element={<SearchFlight/>} />
-            <Route path="arrivals" element={<SearchFlight/>} />
-          </Route>
-          <Route path="/departures" element={<Board />}>
-            <Route path="" element={<SearchFlight/>}/>
-            <Route path="departures" element={<SearchFlight/>} />
-            <Route path="arrivals" element={<SearchFlight/>} />
           </Route>
         </Routes>
       </BrowserRouter>
