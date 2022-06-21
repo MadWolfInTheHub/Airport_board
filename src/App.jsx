@@ -10,7 +10,7 @@ const App = () => {
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Board/>}>
+          <Route path="/" element={<Board />}>
             <Route path="" element={<SearchFlight/>}/>
             <Route path="departures" element={<SearchFlight/>} />
             <Route path="arrivals" element={<SearchFlight/>} />

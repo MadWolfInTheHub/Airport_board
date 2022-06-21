@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 import FlightsList from './FlightsList';
 import FligthsType from './FligthsType';
 import SearchForm from './SearchForm';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as flightsSelectors from '../selectors/flights.selectors';
 import * as flightsActions from '../actions/flights.actions';
 
 const  SearchFlight = ({ flightsList, getFlightsList }) =>{
-  const { search } = useLocation();
+  const { search, pathname } = useLocation();
+  const props = useLocation();
   const navigate = useNavigate()
-  const { data } = useParams()
+  console.log(props)
   let searchInfo;
   let searchDate;
 
@@ -21,7 +22,7 @@ const  SearchFlight = ({ flightsList, getFlightsList }) =>{
   
   const [value, setValue] = useState(searchInfo === undefined ? '' : searchInfo);
   const [date, setDate] = useState(searchDate === undefined ? '' : searchDate);
-  const [isDeparture, setIsDeparture] = useState( data === 'departures' || data === undefined ? true : false);
+  const [isDeparture, setIsDeparture] = useState(pathname === '/departures' ? true : false);
   const newPath = (value, date) => navigate(`${isDeparture ? '/departures' : '/arrivals'}?search=${value}&date=${date}`);
   
   

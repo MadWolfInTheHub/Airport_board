@@ -9,6 +9,17 @@ body {
   background-color: rgba(36, 191, 202, 0.534);
   padding: 10% ;
 }
+
+a {
+  height: 100%;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
 .airport-board{ 
   display: flex;
   flex-direction: column;
@@ -84,6 +95,7 @@ body {
       &_btn {
         width: 50%;
         height: 60px;
+        padding: 0;
         background-color: #0189D1;
         border: none;
         color: #fff;

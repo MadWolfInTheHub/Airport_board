@@ -3,6 +3,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 
 const Board = ({ flightsList, getFlightsList }) => {
+  console.log('hi')
   return (
     <section className='airport-board'>
       <h4 className='notice'>Please pay Attention that flights after February 24th 2022 were canceled</h4>
